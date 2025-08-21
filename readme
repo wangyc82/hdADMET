@@ -1,16 +1,16 @@
-**hdADMET** 
+# hdADMET
 
 **H**eterogeneous network and **D**eep neural network - based **ADMET** prediction. 
 
-# Status
+## Status
 
 Active development
 
-# Introduction
+## Introduction
 
 Systematical prediction of ADMET is a critical step in drug discovery. Among various obstacles hindering clinical translation, lacking effective multi-task methods for integration inner-relationships among ADMET features has become a bottleneck. hdADMET incorporated compound-drug relationships, the experimental validated ADMET features of drugs, and the interrelationships among ADMET properties to transform the embedding representations into a kernel-based DNN for boosting the learning ability of prediction model.
 
-# Usage
+## Usage
 
 1. Installation
 
@@ -69,6 +69,6 @@ Usage example:
     > predictions<-CIPHEN(Acd,Adp,App,len1,len2,len3,len4,len5)
     
 
-# Contact
+## Contact
 
 For technical issues please send an email to wangyongcui@mail.kib.ac.cn.
