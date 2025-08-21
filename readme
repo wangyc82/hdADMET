@@ -8,7 +8,7 @@ Active development
 
 # Introduction
 
-Early prediction of compound-protein interactions (CPIs) is a critical step in drug discovery. Among various obstacles hindering clinical translation, lacking effective methods for multi-type network integration has become a bottleneck. CIPHEN detected CPIs across the entire human protein space through integrating protein-protein interaction (PPI) network into a heterogeneous network (HN).
+Systematical prediction of ADMET is a critical step in drug discovery. Among various obstacles hindering clinical translation, lacking effective multi-task methods for integration inner-relationships among ADMET features has become a bottleneck. hdADMET incorporated compound-drug relationships, the experimental validated ADMET features of drugs, and the interrelationships among ADMET properties to transform the embedding representations into a kernel-based DNN for boosting the learning ability of prediction model.
 
 # Usage
 
