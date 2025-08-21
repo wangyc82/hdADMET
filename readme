@@ -14,7 +14,7 @@ Systematical prediction of ADMET is a critical step in drug discovery. Among var
 
 1. Installation
 
-   Prerequisites of CIPHEN includes the following: 
+   Prerequisites of hdADMET includes the following: 
 
    - R is properly installed; 
 
@@ -22,82 +22,50 @@ Systematical prediction of ADMET is a critical step in drug discovery. Among var
 
    - git (2.21.1)
 
-    Installation of CIPHEN includes the following steps:
+    Installation of hdADMET includes the following steps:
 
-    - step 1: git clone https://github.com/wangyc82/CIPHEN;
+    - step 1: git clone https://github.com/wangyc82/hdADMET;
 
-    - step 2: download the example data (exampleData.RData) from CIPHEN repository, and put it in the CIPHEN folder.
+    - step 2: download the example data (example-data.RData) from hdADMET repository, and put it in the hdADMET folder.
 
-    Dependencies of CIPHEN includes the following: 
+    Dependencies of hdADMET includes the following: 
 
     - word2vec package and its dependencies.
-    - randomForest package and its dependencies.
+    - h2o package and its dependencies.
 
     Testing of successful installation by running the following commands in R:
      
        > library(word2vec)
-       > library(randomForest)
+       > library(h2o)
 
 
 2. Preparation of the input files
 
-Acd (adjacent matrix representing the interactions between new compounds and known ligands)
-Adp (adjacent matrix representing the interactions between known ligands and their receptors)
-App (adjacent matrix representing PPI interactions)
+Acd (adjacent matrix representing the interactions between new compounds and known clinical drugs)
+Adp (adjacent matrix representing the validated ADMET properties for clinical drugs)
+App (adjacent matrix representing ADMET inner-relationships)
 
 take example data for instance
 
-     > load('~/CIPHEN/exampleData.RData')
+     > load('~/hdADMET/example-data.RData')
 
-example data includes the MACCs fingerprints for new compounds and known ligands, MACCs.fp.mat.chembl and new.chem.MACCs.mat
-adjacent matrix representing ligands and their recptors,comp_tar_mat2
-adjacent matrix representing PPI interaction, PPI_adj_mat
+example data includes the MACCs fingerprints for new compounds (MACCs.fp.mat) and anticancer drugs (MACCs.fp.mat.CA)
+adjacent matrix representing drug-ADMET interaction,adj_ADMET_CA1
+adjacent matrix representing ADMET inter-relationships, ADMET_cor that were obtained by the ADMET profiles of drugs
 
-preparing Acd
-
-     > sim.MACCs.mat.new<-matrix(0,nrow(new.chem.MACCs.mat),nrow(MACCs.fp.mat.chembl))
-     > rownames(sim.MACCs.mat.new)<-rownames(new.chem.MACCs.mat)
-     > colnames(sim.MACCs.mat.new)<-rownames(MACCs.fp.mat.chembl)
-     > for (i in 1:nrow(new.chem.MACCs.mat)) {
-     >   for (j in 1:nrow(MACCs.fp.mat.chembl)) {
-     >     sim.MACCs.mat.new[i,j]<-fpSim(new.chem.MACCs.mat[i,], MACCs.fp.mat.chembl[j,], method="Tanimoto")
-     >      }
-     >     }
-
-     > Acd.full<-matrix(0,nrow(sim.MACCs.mat.new),nrow(MACCs.fp.mat.chembl))
-     > rownames(Acd.full)<-rownames(sim.MACCs.mat.new)
-     > colnames(Acd.full)<-colnames(sim.MACCs.mat.new)
-     > Acd.full[which(sim.MACCs.mat.new>=0.3)]<-1
-threshold 0.3 determined by the distribution of as.vector(sim.MACCs.mat.new) and make sure length(which(rowSums(Acd.full)==0))==0
-     
-     > Acd<-Acd.full[,which(colSums(Acd.full)!=0)]
-
-prepare Adp
-
-     > Adp.full<-comp_tar_mat2[colnames(Acd),intersect(colnames(comp_tar_mat2),rownames(PPI_adj_mat))]
-     > Adp<-Adp.full[which(rowSums(Adp.full)!=0),]
-     > Adp<-Adp[,which(colSums(Adp)!=0)]
-     > Acd<-Acd[,rownames(Adp)]
-
-prepare App
-
-    > App.full<-PPI_adj_mat[colnames(Adp),]
-    > App<-App.full[,-which(is.na(colnames(App.full)))]
-    > App<-App[,which(colSums(App)!=0)]
-
-make sure compound and protein name has no any delimeter
+Following the instruction of hdADMET.R to prepare Acd, Adp, and App, and make sure compound and protein name has no any delimeter
 
 set len1, len2, len3, len4, len5 accoding the dimension of Acd, Adp, App
 
-For this example data, set len1=10000;len2=100000;len3=1e6;len4=1e+7;len5=1e+8;
+For this example data, set len1=10000;len2=1e5;len3=1e5;len4=1000;len5=5*1e+5.
 
-3. Running CIPHEN
+3. Running hdADMET
 
-The main function of DeepDRK is DeepDRKpredictor.R. Get your input files prepared, and run it like this:
+The main function of hdADMET is hdADMET.R. Get your input files prepared, and run it like this:
 
 Usage example:
 
-    > source('~/CIPHEN/CIPHEN.R')
+    > source('~/hdADMET/hdADMET.R')
     > predictions<-CIPHEN(Acd,Adp,App,len1,len2,len3,len4,len5)
     
 In the following, we will show how to get MACCs fingerprints from compund sdf file
