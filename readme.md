@@ -56,7 +56,7 @@ example data includes the MACCs fingerprints for new compounds (MACCs.fp.mat) an
 adjacent matrix representing drug-ADMET interaction,adj_ADMET_CA1
 adjacent matrix representing ADMET inter-relationships, ADMET_cor that were obtained by the ADMET profiles of drugs
 
-Following the instruction of hdADMET.R to prepare Acd, Adp, and App, and make sure compound and protein name has no any delimeter
+Following the instruction of hdADMET.R to prepare Acd, Adp, and App, and make sure compound and ADMET features has no any delimeter
 
 set len1, len2, len3, len4, len5 accoding the dimension of Acd, Adp, App
 
