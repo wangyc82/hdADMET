@@ -40,9 +40,12 @@ Systematical prediction of ADMET is a critical step in drug discovery. Among var
 
 
 2. Preparation of the input files
+The folliwng three matrix need be to prepared for running hdADMET
 
 Acd (adjacent matrix representing the interactions between new compounds and known clinical drugs)
+
 Adp (adjacent matrix representing the validated ADMET properties for clinical drugs)
+
 App (adjacent matrix representing ADMET inner-relationships)
 
 take example data for instance
