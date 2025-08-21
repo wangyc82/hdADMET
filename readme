@@ -68,13 +68,6 @@ Usage example:
     > source('~/hdADMET/hdADMET.R')
     > predictions<-CIPHEN(Acd,Adp,App,len1,len2,len3,len4,len5)
     
-In the following, we will show how to get MACCs fingerprints from compund sdf file
-
-    > library(ChemmineR)
-    > library(ChemmineOB)
-    > compounds<-read.SDFset("~/CIPHEN/compounds.sdf")
-    > MACCs.fp.mat<-fingerprintOB(compounds,"MACCS")@fpma
-
 
 # Contact
 
