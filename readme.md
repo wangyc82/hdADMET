@@ -69,7 +69,7 @@ The main function of hdADMET is hdADMET.R. Get your input files prepared, and ru
 Usage example:
 
     > source('~/hdADMET/hdADMET.R')
-    > predictions<-CIPHEN(Acd,Adp,App,len1,len2,len3,len4,len5)
+    > predictions<-hdADMET(Acd,Adp,App,len1,len2,len3,len4,len5)
     
 
 ## Contact
